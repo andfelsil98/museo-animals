@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-operations',
@@ -30,20 +31,23 @@ export class OperationsComponent {
   }
 
   calculateGrams() {
-    if (this.clientPrice == 0 || this.lbPrice == 0) {
-      return window.alert('Por favor introdusca un valor mayor a 0');
+    if (this.clientPrice <= 0 || this.lbPrice <= 0) {
+      swal("Accion no valida!", "Por favor introdusca un valor positivo", "error");
     } else {
       this.result = (this.clientPrice * this.grams) / this.lbPrice;
+      this.porcentaje = this.result/this.grams;
       this.unidad = 'gramos';
     }
   }
 
   calculatePrice() {
-    if (this.clientGrams == 0 || this.lbPrice == 0) {
-      return window.alert('Por favor introdusca un valor mayor a 0');
+    if (this.clientGrams <= 0 || this.lbPrice <= 0) {
+      // return window.alert('Por favor introdusca un valor mayor a 0');
+      swal("Accion no valida!", "Por favor introdusca un valor positivo", "error");
     } else {
       this.result = (this.clientGrams * this.lbPrice) / this.grams;
-      this.porcentaje = (this.clientGrams * 100) / this.lbPrice;
+      // this.porcentaje = (this.clientGrams * 100) / this.lbPrice;
+      this.porcentaje = this.result/this.lbPrice;
       this.unidad = 'pesos';
     }
   }

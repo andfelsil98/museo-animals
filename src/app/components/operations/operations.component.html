@@ -1,0 +1,89 @@
+<div class="font d-flex  justify-content-center align-items-center ">
+    <div *ngIf="!optionSelected">
+        <h2>Que me suministra el cliente?</h2>
+        <label for="">Gramaje </label>
+        <input
+          name="option"
+          value="grams"
+          type="radio"
+          [(ngModel)]="optionSelected"
+        />
+        <label for="">Valor </label>
+        <input
+          name="option"
+          value="value"
+          [(ngModel)]="optionSelected"
+          type="radio"
+        />
+      </div>
+      
+      <div *ngIf="optionSelected">
+        <label for="">Ingresar el valor por libra del producto: </label>
+        <input type="text" [(ngModel)]="lbPrice" />
+        <br />
+        <br />
+        <div *ngIf="optionSelected == 'value'">
+          <label for="">Ingresar el valor que necesita el cliente: </label>
+          <input type="text" [(ngModel)]="clientPrice" />
+        </div>
+        <div *ngIf="optionSelected == 'grams'">
+          <label for="">Ingresar los gramos que necesita el cliente: </label>
+          <input type="text" [(ngModel)]="clientGrams" />
+        </div>
+        <br />
+        <button
+          class="btn btn-success"
+          *ngIf="lbPrice && clientPrice"
+          type="button"
+          (click)="calculateGrams()"
+        >
+          Calcular gramos
+        </button>
+        <button
+          class="btn btn-success"
+          *ngIf="lbPrice && clientGrams"
+          type="button"
+          (click)="calculatePrice()"
+        >
+          Calcular precio
+        </button>
+        <button type="button" class="btn btn-primary" (click)="borrarInputRadio()">
+          Volver
+        </button>
+        <button type="button" class="btn btn-danger" (click)="borrarInputText()">
+          Reset
+        </button>
+        <p *ngIf="result && unidad == 'gramos'">
+          Los gramos a pesar son {{ result }} {{ unidad }} El equivalente en el
+          sistema es {{ porcentaje }}
+        </p>
+        <p *ngIf="result && unidad == 'pesos'">
+          El precio a pagar es de {{ result }} {{ unidad }}
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div *ngIf="!optionSelected">
+            <div class="card-header">
+                <h2>¿Que me suministra el cliente?</h2>
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center">
+              <h5 class="card-title me-2 ">Gramaje</h5>
+              <input
+              name="option"
+              value="grams"
+              type="radio"
+              [(ngModel)]="optionSelected"
+            />
+            <h5 class="card-title me-2 ml-2 ">Valor</h5>
+            <input
+              name="option"
+              value="value"
+              [(ngModel)]="optionSelected"
+              type="radio"
+            />
+            </div>
+        </div>
+      </div>
+</div>
